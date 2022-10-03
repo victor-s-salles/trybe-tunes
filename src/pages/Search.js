@@ -1,5 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
+import searchAlbumsAPI from '../services/searchAlbumsAPI';
+import Loading from './Loading';
 
 class Search extends React.Component {
   constructor() {
@@ -7,7 +10,14 @@ class Search extends React.Component {
     this.state = {
       search: '',
       btnDisable: true,
+      isLoading: true,
+      searchList: [],
+      foundResults: true,
     };
+  }
+
+  componentDidMount() {
+    this.searchArtist();
   }
 
   handleChange = (event) => {
@@ -27,8 +37,69 @@ class Search extends React.Component {
     }
   };
 
+  searchArtist = async () => {
+    const { search } = this.state;
+    const searchList = await searchAlbumsAPI(search);
+    this.setState(() => ({ isLoading: false,
+      searchList }), () => {
+      this.setState({ isLoading: false });
+      this.validadeResults();
+    });
+  };
+
+  clickBtn = () => {
+    this.searchArtist();
+    const { search } = this.state;
+    this.setState(() => ({
+      historySearch: search,
+      search: '',
+      isLoading: true,
+    }));
+  };
+
+  validadeResults = () => {
+    const { searchList } = this.state;
+    if (searchList.length < 1) {
+      this.setState({ foundResults: false });
+    } else {
+      this.setState({ foundResults: true });
+    }
+  };
+
+  mapSearch = () => {
+    const { searchList, historySearch } = this.state;
+    const list = (
+      <div>
+        <h2>
+          Resultado de álbuns de:
+          {' '}
+          {historySearch}
+        </h2>
+        {searchList.map((obj, index) => (
+          <div key={ index }>
+            <img
+              src={ obj.artworkUrl100 }
+              alt={ obj.collectionName }
+            />
+            <p>{obj.collectionName}</p>
+            <p>{obj.artistName}</p>
+            <Link
+              data-testid={ `link-to-album-${obj.collectionId}` }
+              to={ `/album/${obj.collectionId}` }
+            >
+              Ir Para
+
+            </Link>
+          </div>))}
+      </div>);
+    if (searchList < 1) {
+      return [];
+    }
+    return list;
+  };
+
   render() {
-    const { search, btnDisable } = this.state;
+    const { search, btnDisable, isLoading, foundResults } = this.state;
     return (
       <div data-testid="page-search">
         <Header />
@@ -45,11 +116,14 @@ class Search extends React.Component {
             data-testid="search-artist-button"
             type="button"
             disabled={ btnDisable }
+            onClick={ this.clickBtn }
           >
             Pesquisar
 
           </button>
         </form>
+        <div>{isLoading ? <Loading /> : this.mapSearch()}</div>
+        <div>{!foundResults && <p>Nenhum álbum foi encontrado</p>}</div>
       </div>
     );
   }

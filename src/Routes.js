@@ -13,7 +13,7 @@ class Router extends React.Component {
     return (
       <Switch>
         <Route exact path="/" component={ Login } />
-        <Route path="/search" component={ Search } />
+        <Route path="/Search" component={ Search } />
         <Route path="/album/:id" component={ Album } />
         <Route path="/favorites" component={ Favorites } />
         <Route path="/profile/edit" component={ ProfileEdit } />
