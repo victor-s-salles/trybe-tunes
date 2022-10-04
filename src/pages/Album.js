@@ -16,7 +16,6 @@ class Album extends React.Component {
   }
 
   componentDidMount() {
-    console.log('Montado');
     this.getMusic();
   }
 
@@ -34,9 +33,17 @@ class Album extends React.Component {
 
   initAlbum = () => {
     const { album } = this.state;
-    const albumMusics = album;
+    const albumMusics = [...album];
     albumMusics.shift();
     this.setState({ isLoading: false, albumMusics });
+  };
+
+  isLoadingFun = (is) => {
+    if (is) {
+      this.setState({ isLoading: true });
+    } else {
+      this.setState({ isLoading: false });
+    }
   };
 
   render() {
@@ -58,11 +65,14 @@ class Album extends React.Component {
             {artistName}
           </h6>
         </div>
-        {albumMusics.map((music, index) => (
+        {albumMusics.map((music) => (
           <MusicCard
-            key={ index }
+            music={ music }
+            key={ music.trackId }
             trackName={ music.trackName }
             previewUrl={ music.previewUrl }
+            trackId={ music.trackId }
+            isLoadingFun={ this.isLoadingFun }
           />
         ))}
       </div>
