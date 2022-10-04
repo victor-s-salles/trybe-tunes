@@ -97,7 +97,11 @@ MusicCard.propTypes = {
   trackName: PropTypes.string.isRequired,
   previewUrl: PropTypes.string.isRequired,
   trackId: PropTypes.number.isRequired,
-  music: PropTypes.arrayOf.isRequired,
+  music: PropTypes.shape({
+    previewUrl: PropTypes.string.isRequired,
+    trackName: PropTypes.string.isRequired,
+    trackId: PropTypes.number.isRequired,
+  }).isRequired,
 
 };
 export default MusicCard;

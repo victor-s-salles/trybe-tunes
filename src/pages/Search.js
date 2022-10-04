@@ -100,6 +100,7 @@ class Search extends React.Component {
 
   render() {
     const { search, btnDisable, isLoading, foundResults } = this.state;
+    if (isLoading) return <Loading />;
     return (
       <div data-testid="page-search">
         <Header />
@@ -122,7 +123,7 @@ class Search extends React.Component {
 
           </button>
         </form>
-        <div>{isLoading ? <Loading /> : this.mapSearch()}</div>
+        <div>{this.mapSearch()}</div>
         <div>{!foundResults && <p>Nenhum álbum foi encontrado</p>}</div>
       </div>
     );
