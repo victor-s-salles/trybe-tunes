@@ -44,22 +44,21 @@ class MusicCard extends React.Component {
 
   favoriteSong = async () => {
     const { fav } = this.state;
-    const { music, isLoadingFun } = this.props;
+    const { music } = this.props;
     if (fav) {
       this.setState({ isLoading: true });
-      isLoadingFun(true);
+
       await addSong(music);
       console.log('adiciona');
       this.setState({ isLoading: false });
-      isLoadingFun(false);
     } else {
       this.setState({ isLoading: true });
-      isLoadingFun(true);
+
       await removeSong(music);
       console.log('Remove');
       this.setState({ isLoading: false });
-      isLoadingFun(false);
     }
+    this.getFavorites();
   };
 
   render() {
@@ -79,12 +78,12 @@ class MusicCard extends React.Component {
           <code>audio</code>
           .
         </audio>
-        <label data-testid={ `checkbox-music-${trackId}` } htmlFor="fav">
+        <label data-testid={ `checkbox-music-${trackId}` } htmlFor={ trackId }>
           Favorita
           <input
             type="checkbox"
             name="fav"
-            id="fav"
+            id={ trackId }
             onChange={ this.handleChange }
             checked={ fav }
           />
@@ -98,6 +97,7 @@ MusicCard.propTypes = {
   trackName: PropTypes.string.isRequired,
   previewUrl: PropTypes.string.isRequired,
   trackId: PropTypes.number.isRequired,
+  music: PropTypes.arrayOf.isRequired,
 
 };
 export default MusicCard;

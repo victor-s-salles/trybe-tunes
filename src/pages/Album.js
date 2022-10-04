@@ -38,14 +38,6 @@ class Album extends React.Component {
     this.setState({ isLoading: false, albumMusics });
   };
 
-  isLoadingFun = (is) => {
-    if (is) {
-      this.setState({ isLoading: true });
-    } else {
-      this.setState({ isLoading: false });
-    }
-  };
-
   render() {
     const { album, isLoading, albumMusics } = this.state;
     if (isLoading) return <Loading />;
@@ -72,7 +64,6 @@ class Album extends React.Component {
             trackName={ music.trackName }
             previewUrl={ music.previewUrl }
             trackId={ music.trackId }
-            isLoadingFun={ this.isLoadingFun }
           />
         ))}
       </div>
