@@ -34,7 +34,9 @@ class Profile extends React.Component {
         {!isLoading && (
           <div>
             <img data-testid="profile-image" src={ image } alt={ name } />
-
+            <Link to="/profile/edit">
+              <h5>Editar perfil</h5>
+            </Link>
             <div>
               <h3>
                 <h3>User Test</h3>
