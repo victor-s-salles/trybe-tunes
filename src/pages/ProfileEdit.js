@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import { getUser, updateUser } from '../services/userAPI';
 import Loading from './Loading';
@@ -30,7 +31,8 @@ class ProfileEdit extends React.Component {
   };
 
   displayInfo = () => {
-    const { name, description, email, image } = this.state.userInfo;
+    const { userInfo } = this.state;
+    const { name, description, email, image } = userInfo;
     this.setState({
       name,
       description,
@@ -138,5 +140,9 @@ class ProfileEdit extends React.Component {
     );
   }
 }
-
+ProfileEdit.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
 export default ProfileEdit;

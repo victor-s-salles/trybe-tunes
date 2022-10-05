@@ -20,8 +20,7 @@ class Profile extends React.Component {
   getInfo = async () => {
     this.setState({ isLoading: true });
     const info = await getUser();
-    this.setState({ userInfo: info,
-      isLoading: false });
+    this.setState({ userInfo: info, isLoading: false });
   };
 
   render() {
@@ -32,23 +31,20 @@ class Profile extends React.Component {
       <div data-testid="page-profile">
         <Header />
         {isLoading && <Loading />}
-        {!isLoading && <div>
-          <img data-testid="profile-image" src={ image } alt={ name } />
-          <Link to="/profile/edit"><h5>Editar perfil</h5></Link>
+        {!isLoading && (
           <div>
-            <h3>
-              <h3>User Test</h3>
-              {name}
+            <img data-testid="profile-image" src={ image } alt={ name } />
 
-            </h3>
+            <div>
+              <h3>
+                <h3>User Test</h3>
+                {name}
+              </h3>
+            </div>
+            <h3>{email}</h3>
+            <h3>{description}</h3>
           </div>
-          <h3>
-            {email}
-          </h3>
-          <h3>
-            {description}
-          </h3>
-        </div>}
+        )}
       </div>
     );
   }
