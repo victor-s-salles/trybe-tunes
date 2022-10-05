@@ -38,6 +38,10 @@ class Album extends React.Component {
     this.setState({ isLoading: false, albumMusics });
   };
 
+  removeSongList = () => {
+
+  };
+
   render() {
     const { album, isLoading, albumMusics } = this.state;
     if (isLoading) return <Loading />;
@@ -64,6 +68,7 @@ class Album extends React.Component {
             trackName={ music.trackName }
             previewUrl={ music.previewUrl }
             trackId={ music.trackId }
+            removeSongList={ this.removeSongList }
           />
         ))}
       </div>
