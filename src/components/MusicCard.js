@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { addSong, removeSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
 import Loading from '../pages/Loading';
+import './MusicCard.css';
+import { AiFillHeart } from 'react-icons/ai';
 
 class MusicCard extends React.Component {
   constructor() {
@@ -65,8 +67,8 @@ class MusicCard extends React.Component {
     const { fav, isLoading } = this.state;
     if (isLoading) return <Loading />;
     return (
-      <div>
-        <h3>{trackName}</h3>
+      <div className="music-card-pricipal-div">
+        <h3 className="card-trackname">{trackName}</h3>
         <audio
           data-testid="audio-component"
           src={ previewUrl }
@@ -78,7 +80,7 @@ class MusicCard extends React.Component {
           .
         </audio>
         <label data-testid={ `checkbox-music-${trackId}` } htmlFor={ trackId }>
-          Favorita
+          <AiFillHeart className="icon-fav" />
           <input
             type="checkbox"
             name="fav"

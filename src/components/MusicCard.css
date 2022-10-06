@@ -1,0 +1,26 @@
+.music-card-pricipal-div {
+  align-items: center;
+  border-bottom: 1px solid #ccd4e1;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 15px;
+  margin-top: 20px;
+  padding-bottom: 2px;
+}
+
+.card-trackname {
+  align-items: center;
+  display: flex;
+  font-family: Epilogue;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px;
+  margin-right: 50px;
+  width: 400px;
+}
+
+.icon-fav {
+  color: red;
+  font-size: 25px;
+}

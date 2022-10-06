@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 import Loading from './Loading';
+import './Search.css';
 
 class Search extends React.Component {
   constructor() {
@@ -69,28 +70,33 @@ class Search extends React.Component {
   mapSearch = () => {
     const { searchList, historySearch } = this.state;
     const list = (
-      <div>
-        <h2>
-          Resultado de álbuns de:
-          {' '}
-          {historySearch}
-        </h2>
-        {searchList.map((obj, index) => (
-          <div key={ index }>
-            <img
-              src={ obj.artworkUrl100 }
-              alt={ obj.collectionName }
-            />
-            <p>{obj.collectionName}</p>
-            <p>{obj.artistName}</p>
-            <Link
-              data-testid={ `link-to-album-${obj.collectionId}` }
-              to={ `/album/${obj.collectionId}` }
-            >
-              Ir Para
+      <div className="search-results-map">
+        <div className="search-div-h3-results">
+          <h2 className="search-h2-results">
+            Resultado de álbuns de:
+            {' '}
+            {historySearch}
+          </h2>
+        </div>
+        <div className="map-div-search">
+          {searchList.map((obj, index) => (
+            <div className="div-map-search" key={ index }>
 
-            </Link>
-          </div>))}
+              <Link
+                data-testid={ `link-to-album-${obj.collectionId}` }
+                to={ `/album/${obj.collectionId}` }
+              >
+                <img
+                  className="image-search"
+                  src={ obj.artworkUrl100 }
+                  alt={ obj.collectionName }
+                />
+                <p className="collection-search">{obj.collectionName}</p>
+                <p className="artistName-search">{obj.artistName}</p>
+
+              </Link>
+            </div>))}
+        </div>
       </div>);
     if (searchList < 1) {
       return [];
@@ -102,29 +108,41 @@ class Search extends React.Component {
     const { search, btnDisable, isLoading, foundResults } = this.state;
     if (isLoading) return <Loading />;
     return (
-      <div data-testid="page-search">
+      <div className="search-div" data-testid="page-search">
         <Header />
-        <p>Search</p>
-        <form action="">
-          <input
-            data-testid="search-artist-input"
-            name="search"
-            type="text"
-            onChange={ this.handleChange }
-            value={ search }
-          />
-          <button
-            data-testid="search-artist-button"
-            type="button"
-            disabled={ btnDisable }
-            onClick={ this.clickBtn }
-          >
-            Pesquisar
+        <div className="search-div-bar">
+          <div className="search-div-form">
+            <form action="">
+              <input
+                className="search-input"
+                data-testid="search-artist-input"
+                name="search"
+                type="text"
+                onChange={ this.handleChange }
+                value={ search }
+                placeholder="Nome do Artista"
+              />
+              <button
+                className="search-btn"
+                data-testid="search-artist-button"
+                type="button"
+                disabled={ btnDisable }
+                onClick={ this.clickBtn }
+              >
+                Procurar
 
-          </button>
-        </form>
-        <div>{this.mapSearch()}</div>
-        <div>{!foundResults && <p>Nenhum álbum foi encontrado</p>}</div>
+              </button>
+            </form>
+          </div>
+          <div className="search-results-div">
+            <div className="search-results-map-pre">{this.mapSearch()}</div>
+            <div className="search-not-div-search">
+              {!foundResults
+            && <p className="text-not-div-search">Nenhum álbum foi encontrado</p>}
+
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

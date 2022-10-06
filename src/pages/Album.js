@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import MusicCard from '../components/MusicCard';
 import getMusics from '../services/musicsAPI';
 import Loading from './Loading';
+import './Album.css';
 
 class Album extends React.Component {
   constructor() {
@@ -36,6 +37,7 @@ class Album extends React.Component {
     const albumMusics = [...album];
     albumMusics.shift();
     this.setState({ isLoading: false, albumMusics });
+    console.log(album[0]);
   };
 
   removeSongList = () => {
@@ -47,30 +49,43 @@ class Album extends React.Component {
     if (isLoading) return <Loading />;
     const { collectionName, artistName, artworkUrl100 } = album[0];
     return (
-      <div data-testid="page-album">
+      <div className="album-principal-div" data-testid="page-album">
         <Header />
-        <div>
-          <h4 data-testid="album-name">
-            Collection Name:
-            {' '}
-            {collectionName}
-          </h4>
-          <img src={ artworkUrl100 } alt={ collectionName } />
-          <h6 data-testid="artist-name">
-            Artist Name:
-            {artistName}
-          </h6>
+
+        <div className="album-list-div">
+          <div className="album-bar">
+            <h1>{collectionName}</h1>
+            <h4>{artistName}</h4>
+
+          </div>
+          <div className="album-div-content">
+            <div className="album-collection-div">
+              {/* <h4 data-testid="album-name">
+                Collection Name:
+                {' '}
+                {collectionName}
+              </h4> */}
+              <img className="album-image" src={ artworkUrl100 } alt={ collectionName } />
+              {/* <h6 data-testid="artist-name">
+                Artist Name:
+                {artistName}
+              </h6> */}
+            </div>
+            <div className="music-card-map-div">
+              {albumMusics.map((music) => (
+                <MusicCard
+                  className="album-music-card"
+                  music={ music }
+                  key={ music.trackId }
+                  trackName={ music.trackName }
+                  previewUrl={ music.previewUrl }
+                  trackId={ music.trackId }
+                  removeSongList={ this.removeSongList }
+                />
+              ))}
+            </div>
+          </div>
         </div>
-        {albumMusics.map((music) => (
-          <MusicCard
-            music={ music }
-            key={ music.trackId }
-            trackName={ music.trackName }
-            previewUrl={ music.previewUrl }
-            trackId={ music.trackId }
-            removeSongList={ this.removeSongList }
-          />
-        ))}
       </div>
     );
   }

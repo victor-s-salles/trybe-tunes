@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { createUser } from '../services/userAPI';
 import Loading from './Loading';
+import './Login.css';
+import logo from './images/login-logo.png';
 
 class Login extends React.Component {
   constructor() {
@@ -45,27 +47,33 @@ class Login extends React.Component {
     const { name, loginDisable, isLoading } = this.state;
     // if (isLoading) return <Loading />;
     return (
-      <div data-testid="page-login">
-        <form action="">
-          <label htmlFor="login">
-            Nome:
-            <input
-              id="login"
-              name="name"
-              type="text"
-              data-testid="login-name-input"
-              onChange={ this.handleChange }
-              value={ name }
-            />
-          </label>
-          <button
-            type="button"
-            data-testid="login-submit-button"
-            disabled={ loginDisable }
-            onClick={ this.saveLogin }
-          >
-            Entrar
-          </button>
+      <div className="login-div" data-testid="page-login">
+        <form className="login-form" action="">
+          <div className="login-form-div">
+            <img className="login-logo" src={ logo } alt="Logo trybe tunes" />
+            <label htmlFor="login" className="login-label">
+
+              <input
+                className="login-input"
+                placeholder="Qual é seu nome?"
+                id="login"
+                name="name"
+                type="text"
+                data-testid="login-name-input"
+                onChange={ this.handleChange }
+                value={ name }
+              />
+            </label>
+            <button
+              className="login-button"
+              type="button"
+              data-testid="login-submit-button"
+              disabled={ loginDisable }
+              onClick={ this.saveLogin }
+            >
+              Entrar
+            </button>
+          </div>
           {isLoading && <Loading />}
         </form>
       </div>

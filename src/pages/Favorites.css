@@ -1,0 +1,32 @@
+.favorites-principal-div {
+  display: flex;
+  width: 100%;
+}
+
+.favorites-bar {
+  align-items: center;
+  background-color: #003be5;
+  background-image: url('./images/login-BGAZUL.png');
+  background-size: cover;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  font-family: Epilogue;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  justify-content: center;
+  line-height: 20px;
+  min-height: 14%;
+  text-align: center;
+  width: 100%;
+}
+
+.second-favorites-div {
+  width: 100%;
+}
+
+.favorites-list .music-card-pricipal-div {
+  margin-left: 250px;
+  margin-right: 250px;
+}
