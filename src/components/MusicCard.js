@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { AiFillHeart } from 'react-icons/ai';
 import { addSong, removeSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
 import Loading from '../pages/Loading';
 import './MusicCard.css';
-import { AiFillHeart } from 'react-icons/ai';
 
 class MusicCard extends React.Component {
   constructor() {
