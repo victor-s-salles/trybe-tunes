@@ -118,3 +118,43 @@
   margin-top: 60px;
 }
 
+@media ( max-width : 600px ) {
+
+  .header-header {
+    width: 40%;
+  }
+
+  .search-results-div {
+    width: 50%;
+  }
+
+  .search-div-form form {
+    text-align: center;
+    width: 30vh;
+  }
+
+  .search-input {
+    margin: 10px;
+    width: 80%;
+  }
+
+  .search-btn {
+    margin: 10px;
+  }
+
+  .header-logo {
+    width: 90%;
+  }
+
+  .search-results-div {
+    width: 90%;
+  }
+
+  .search-h2-results {
+    margin-right: 10px;
+  }
+
+  .header-link {
+    display: flex;
+  }
+}
