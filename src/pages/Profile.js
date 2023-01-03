@@ -20,14 +20,18 @@ class Profile extends React.Component {
 
   getInfo = async () => {
     this.setState({ isLoading: true });
-    const info = await getUser();
+    let info = await getUser();
+    if(!info.image) {
+      info = {...info, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRShJ9Jpov-4Kf5y1kahVXqnjJhAZiEtyDPyZy6JuWEHQ&s'}
+    }
     this.setState({ userInfo: info, isLoading: false });
   };
 
   render() {
     const { isLoading, userInfo } = this.state;
-    const { name, email, image, description } = userInfo;
+    let { name, email, image, description } = userInfo;
     // if (isLoading) return <Loading />;
+
     return (
       <div className="profile-principal-div" data-testid="page-profile">
         <Header />

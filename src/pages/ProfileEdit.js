@@ -39,6 +39,8 @@ class ProfileEdit extends React.Component {
       email,
       image,
     });
+
+
   };
 
   handleChange = (event) => {
@@ -69,6 +71,7 @@ class ProfileEdit extends React.Component {
     this.setState({ isLoading: false });
     const { history } = this.props;
     history.push('/profile');
+    
   };
 
   render() {

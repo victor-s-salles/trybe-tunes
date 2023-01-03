@@ -119,6 +119,7 @@ class Search extends React.Component {
                 name="search"
                 type="text"
                 onChange={ this.handleChange }
+                onKeyUp={ this.handleChange }
                 value={ search }
                 placeholder="Nome do Artista"
               />

@@ -62,6 +62,7 @@ class Login extends React.Component {
                 data-testid="login-name-input"
                 onChange={ this.handleChange }
                 value={ name }
+                onKeyUp={ this.handleChange }
               />
             </label>
             <button

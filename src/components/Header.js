@@ -22,6 +22,11 @@ class Header extends React.Component {
   getName = async () => {
     const { name, image } = await getUser();
     this.setState({ name, isLoading: false, image });
+
+    if(!image) {
+      this.setState({ image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRShJ9Jpov-4Kf5y1kahVXqnjJhAZiEtyDPyZy6JuWEHQ&s",})
+    }
+
   };
 
   render() {
