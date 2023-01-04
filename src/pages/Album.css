@@ -5,14 +5,14 @@
 .album-list-div {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 85%;
 }
 
 .album-collection-div {
   align-items: flex-start;
   display: flex;
   justify-content: center;
-  min-width: 500px;
+  min-width: 400px;
 }
 
 .album-music-card {
